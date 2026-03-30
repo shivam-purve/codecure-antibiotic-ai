@@ -1,0 +1,11 @@
+[theme]
+# Primary accent color (a clinical teal/blue)
+primaryColor = "#008B8B"
+# Background color
+backgroundColor = "#f0f8ff"
+# Secondary background color for sidebar/cards
+secondaryBackgroundColor = "#e0eeee"
+# Text color
+textColor = "#2c3e50"
+# Font matching medical/clinical feel
+font = "sans serif"

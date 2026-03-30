@@ -1,0 +1,27 @@
+﻿Loading data...
+Target selected: AMX/AMP
+Cleaning data...
+Saving preprocessed data to data/preprocessed_data.csv...
+Dataset shape after missing & intermediate dropping: (9773, 7)
+Building sklearn pipeline...
+Training model...
+Evaluating model...
+
+--- Model Evaluation (AMX/AMP) ---
+Accuracy:  0.6338
+Precision: 0.6156
+Recall:    0.9948
+
+--- Top 10 Feature Importances ---
+1. Age (0.0558)
+2. Infection_Freq (0.0158)
+3. Hospital_before_1 (0.0030)
+4. Diabetes_0 (0.0030)
+5. Hospital_before_0 (0.0029)
+6. Diabetes_1 (0.0029)
+7. Gender_M (0.0026)
+8. Hypertension_1 (0.0026)
+9. Hypertension_0 (0.0025)
+10. Gender_F (0.0023)
+
+Model strictly saved to model/model.pkl!
