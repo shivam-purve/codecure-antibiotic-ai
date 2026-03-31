@@ -88,8 +88,34 @@ def main():
         pos_cases = (y_train == 1).sum()
         scale_w = neg_cases / pos_cases if pos_cases > 0 else 1
         
+        from xgboost import XGBClassifier
+        from sklearn.ensemble import RandomForestClassifier, VotingClassifier
+
+        xgb_clf = XGBClassifier(
+            n_estimators=300, 
+            max_depth=6,
+            learning_rate=0.05,
+            subsample=0.8,
+            colsample_bytree=0.8,
+            random_state=42,
+            scale_pos_weight=scale_w,
+            eval_metric='logloss'
+        )
+
+        rf_clf = RandomForestClassifier(
+            n_estimators=300,
+            class_weight='balanced',
+            max_depth=10,
+            random_state=42
+        )
+
+        ensemble_clf = VotingClassifier(estimators=[
+            ('xgb', xgb_clf),
+            ('rf', rf_clf)
+        ], voting='soft')
+        
         pipeline = Pipeline(steps=[('preprocessor', preprocessor), 
-                                   ('classifier', XGBClassifier(n_estimators=50, random_state=42, scale_pos_weight=scale_w, eval_metric='logloss'))])
+                                   ('classifier', ensemble_clf)])
 
         pipeline.fit(X_train, y_train)
         models_dict[target] = pipeline
