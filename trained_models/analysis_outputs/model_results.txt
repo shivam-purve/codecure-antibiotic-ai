@@ -1,0 +1,18 @@
+MODEL PERFORMANCE SUMMARY
+==================================================
+
+Target Antibiotic: AMC
+Resistance Rate: 58.4%
+
+Logistic Regression:
+  Accuracy: 0.5845
+  ROC-AUC: 0.5665
+
+Random Forest:
+  Accuracy: 0.6041
+  ROC-AUC: 0.5652
+
+Gradient Boosting:
+  Accuracy: 0.6041
+  ROC-AUC: 0.5658
+

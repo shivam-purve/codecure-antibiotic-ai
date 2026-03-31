@@ -1,0 +1,126 @@
+================================================================================
+ANTIBIOTIC RESISTANCE DATASET ANALYSIS SUMMARY
+================================================================================
+
+Analysis Date: 2026-03-30 09:05:15
+
+DATASET OVERVIEW
+--------------------------------------------------
+Total Rows: 10,710
+Total Columns: 27
+
+ANTIBIOTIC RESISTANCE SUMMARY
+--------------------------------------------------
+  AMC:
+    Resistance Rate: 58.4%
+    Resistant: 5,815
+    Susceptible: 3,970
+    Intermediate: 172
+
+  CTX/CRO:
+    Resistance Rate: 57.7%
+    Resistant: 5,748
+    Susceptible: 4,026
+    Intermediate: 183
+
+  FOX:
+    Resistance Rate: 57.6%
+    Resistant: 5,735
+    Susceptible: 4,049
+    Intermediate: 173
+
+  IPM:
+    Resistance Rate: 57.4%
+    Resistant: 5,717
+    Susceptible: 4,054
+    Intermediate: 186
+
+  AMX/AMP:
+    Resistance Rate: 57.4%
+    Resistant: 5,712
+    Susceptible: 4,061
+    Intermediate: 184
+
+  CZ:
+    Resistance Rate: 57.1%
+    Resistant: 5,690
+    Susceptible: 4,097
+    Intermediate: 170
+
+  GEN:
+    Resistance Rate: 19.4%
+    Resistant: 1,936
+    Susceptible: 7,854
+    Intermediate: 167
+
+  AN:
+    Resistance Rate: 19.1%
+    Resistant: 1,905
+    Susceptible: 7,875
+    Intermediate: 177
+
+  CIP:
+    Resistance Rate: 14.5%
+    Resistant: 1,447
+    Susceptible: 8,331
+    Intermediate: 179
+
+  Co-trimoxazole:
+    Resistance Rate: 14.2%
+    Resistant: 1,413
+    Susceptible: 8,370
+    Intermediate: 174
+
+  Acide nalidixique:
+    Resistance Rate: 13.9%
+    Resistant: 1,388
+    Susceptible: 8,379
+    Intermediate: 190
+
+  C:
+    Resistance Rate: 13.9%
+    Resistant: 1,385
+    Susceptible: 8,390
+    Intermediate: 182
+
+  ofx:
+    Resistance Rate: 13.9%
+    Resistant: 1,381
+    Susceptible: 8,406
+    Intermediate: 170
+
+  colistine:
+    Resistance Rate: 13.4%
+    Resistant: 1,338
+    Susceptible: 8,428
+    Intermediate: 191
+
+  Furanes:
+    Resistance Rate: 13.3%
+    Resistant: 1,326
+    Susceptible: 8,457
+    Intermediate: 174
+
+MULTI-DRUG RESISTANCE STATISTICS
+--------------------------------------------------
+  Average resistances per isolate: 4.48
+  MDR isolates (≥2 resistances): 9,123 (85.2%)
+  XDR isolates (≥5 resistances): 5,354 (50.0%)
+  PDR isolates (≥8 resistances): 1,371 (12.8%)
+
+TOP CO-RESISTANCE PAIRS
+--------------------------------------------------
+  AMX/AMP ↔ IPM: 0.313
+  AMX/AMP ↔ CTX/CRO: 0.313
+  AMC ↔ CTX/CRO: 0.313
+  CTX/CRO ↔ IPM: 0.311
+  AMX/AMP ↔ AMC: 0.310
+  CZ ↔ FOX: 0.307
+  AMX/AMP ↔ CZ: 0.304
+  CZ ↔ CTX/CRO: 0.302
+  AMX/AMP ↔ FOX: 0.301
+  FOX ↔ CTX/CRO: 0.301
+
+================================================================================
+END OF SUMMARY
+================================================================================
