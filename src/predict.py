@@ -124,8 +124,9 @@ def predict_resistance(bacteria_name, antibiotic, age=40, gender='Unknown', diab
     else:
         return "Susceptible", float(prob_s), explanation
 
-def recommend_top_3_antibiotics(bacteria_name, age=40, gender='Unknown', diabetes='0', hypertension='0', hospital='0', infection_freq=1.0):
-    """Return top 3 antibiotics with highest probability of being effective (Susceptible)."""
+def recommend_top_3_antibiotics(bacteria_name, exclude_antibiotic=None, age=40, gender='Unknown', diabetes='0', hypertension='0', hospital='0', infection_freq=1.0):
+    """Return top 3 antibiotics with highest probability of being effective (Susceptible),
+    excluding the currently assessed antibiotic so recommendations are genuine alternatives."""
     if not models:
         return []
         
@@ -143,6 +144,9 @@ def recommend_top_3_antibiotics(bacteria_name, age=40, gender='Unknown', diabete
     
     # Scan through all trained antibiotic models
     for abx, model in models.items():
+        # Skip the currently assessed antibiotic — recommendations must be true alternatives
+        if exclude_antibiotic and abx == exclude_antibiotic:
+            continue
         try:
             # Finding probability of index 0 (Susceptible)
             idx_susceptible = list(model.classes_).index(0)

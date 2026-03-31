@@ -276,11 +276,17 @@ if st.button("🔬 Analyze Resistance", type="primary", use_container_width=True
         st.markdown("---")
         
         # 2. Recommendations
-        st.subheader("💡 Top Recommended Alternatives")
-        st.markdown(f"Alternative antibiotics with the highest probability of success against **{bacteria_dropdown}**, factoring in toxicity and cost:")
-        
+        excluded_label = antibiotic_dropdown if antibiotic_dropdown in antibiotics_list else None
+        st.subheader(f"💡 Top Recommended Alternatives for **{bacteria_dropdown}**")
+        st.markdown(
+            f"Ranked alternatives against **{bacteria_dropdown}** in a **{age}-year-old {gender}** patient, "
+            f"factoring in susceptibility probability, toxicity, and cost."
+            + (f"  *(Excluding currently assessed: **{excluded_label}**)*" if excluded_label else "")
+        )
+
         top_3 = recommend_top_3_antibiotics(
-            bacteria_dropdown, 
+            bacteria_dropdown,
+            exclude_antibiotic=excluded_label,
             age=age, gender=gender, hospital=hospital_val,
             diabetes=diabetes_val, hypertension=hypertension_val
         )
@@ -292,22 +298,33 @@ if st.button("🔬 Analyze Resistance", type="primary", use_container_width=True
                 tox_badge = get_clinical_badge(meta['toxicity'], "Toxicity")
                 cost_badge = get_clinical_badge(meta['cost'], "Cost")
                 
+                # Pick border colour by efficacy tier
+                border_color = "#27ae60" if prob >= 0.65 else "#e67e22" if prob >= 0.40 else "#e74c3c"
+                efficacy_label = "High Efficacy" if prob >= 0.65 else "Moderate Efficacy" if prob >= 0.40 else "Lower Efficacy"
+                
                 with rec_cols[idx]:
                     st.markdown(f'''
-                    <div class="metric-card">
+                    <div class="metric-card" style="border-top: 5px solid {border_color};">
                         <div class="metric-title">Rank {idx+1}: {abx}</div>
-                        <div class="metric-value">{prob*100:.1f}%</div>
-                        <small>Statistical Efficacy</small><br><br>
-                        <div style="margin-top: 10px;">{tox_badge} {cost_badge}</div>
+                        <div style="font-size:0.78rem; color:#888; margin-bottom:6px;">vs {bacteria_dropdown}</div>
+                        <div class="metric-value" style="color:{border_color};">{prob*100:.1f}%</div>
+                        <small style="color:{border_color}; font-weight:600;">{efficacy_label}</small><br><br>
+                        <div style="margin-top: 10px;">{tox_badge}{cost_badge}</div>
                     </div>
                     ''', unsafe_allow_html=True)
                     
-                    with st.expander(f"View Feature Explainer for {abx}"):
+                    with st.expander(f"📊 Feature Impact: {abx} vs {bacteria_dropdown}"):
                         if exp:
                             exp_df_top = pd.DataFrame(exp)
-                            fig2 = px.bar(exp_df_top, x='importance', y='feature', orientation='h', height=250)
-                            fig2.update_layout(yaxis={'categoryorder':'total ascending'}, margin=dict(l=0, r=0, t=0, b=0))
+                            fig2 = px.bar(
+                                exp_df_top, x='importance', y='feature', orientation='h', height=250,
+                                color='importance', color_continuous_scale='Blues',
+                                title=f"{abx} — Key Drivers for {bacteria_dropdown}"
+                            )
+                            fig2.update_layout(yaxis={'categoryorder':'total ascending'}, margin=dict(l=0, r=0, t=30, b=0))
                             st.plotly_chart(fig2, use_container_width=True)
+                        else:
+                            st.info("Feature explanation unavailable for this combination.")
         else:
             st.warning("No functioning ML models loaded. Did you train the dataset under `src/train.py`?")
 
